@@ -1,0 +1,36 @@
+{%extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+{% block body %}
+    <div>
+        <div class="card mb-3 " >
+            <div class="row g-0 ">
+                <div class="col-md-4 ">
+                    <img src="{{ post.image }}" class="img-fluid rounded-start h-100 w-100" alt="{{ post.title }}">
+                </div>
+                <div class="col-md-8 ">
+                    <div class="card-header">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                    </div>
+                    <div class="card-body ">
+                        <div class="d-flex g-2">
+                            {% for category in post.categories %}
+                                <a href="{{ path('posts.category.index',{slug:category.slug}) }}" class="badge bg-info text-decoration-none">{{ category.name }}</a>
+                            {% else%}
+                                <span>no category</span>
+                            {% endfor %}
+                        </div>
+                        <p class="card-text">{{ post.content }}</p>
+                        <div class="card-text d-flex justify-content-between h-100">
+                            <small class="text-muted">Created at {{ post.createdAt.format('d/m/Y H:i') }}</small>
+                            {% if post.updatedAt %}
+                                <small class="text-muted">Last updated {{ post.updatedAt.format('d/m/Y H:i') }} </small>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

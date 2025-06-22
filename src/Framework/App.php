@@ -15,87 +15,130 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class App implements RequestHandlerInterface
 {
-    private ?ContainerInterface $container=null;
-    private array $middlewares=[];
-    private int $index=0;
-    public function __construct(private string $configPath)
+
+    /**
+     * Dependencies container (DI)
+     * @var ContainerInterface|null
+     */
+    private ?ContainerInterface $container = null;
+
+    /**
+     * list of middlewares to execute
+     * @var string[]
+     */
+    private array $middlewares = [];
+
+    /**
+     * current index of the middlewares stack
+     * @var int
+     */
+    private int $index = 0;
+
+
+    /**
+     * @param string $containerConfigPath  path to the dependencies configuration file
+     * @param array $modules list of the application modules
+     */
+    public function __construct(private readonly string $containerConfigPath)
     {
     }
 
-    public function run(ServerRequestInterface $request): ResponseInterface{
 
+    /**
+     * start the application and return a HTTP-response
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     *
+     */
+    public function run(ServerRequestInterface $request):ResponseInterface{
 
-        foreach($this->getContainer()->get('modules') as $module){
+        //load modules
+
+        foreach ($this->getContainer()->get('modules') as $module) {
             $this->getContainer()->get($module);
         }
 
         $renderer = $this->getContainer()->get(RendererInterface::class);
-        $renderer->addGlobal('app', $request);
 
-        if($this->getContainer()->has(UserModule::class)){
-            $renderer->addGlobal('auth',AuthServiceInterface::class );
+        $renderer->addGlobal('app', compact('request'));
+
+        if($this->getContainer()->has(AuthServiceInterface::class)){
+            $renderer->addGlobal('auth',$this->getContainer()->get(AuthServiceInterface::class));
         }
 
-        $router = $this->getContainer()->get(RouterInterface::class);
 
-        $route=$router->match($request);
-
+        $router= $this->getContainer()->get(RouterInterface::class);
 
 
-        if($route !== null){
-            foreach ($route->getAttributes() as $key => $value) {
-                $request= $request->withAttribute($key, $value);
-            }
-
-
-            $handler = $route->getHandler();
-            [$controller,$method] = $handler;
-
-            return  call_user_func([$this->container->get($controller),$method],$request);
-
-
-
+        $route= $router->match($request);
+        // dd($router,$request,$router->match($request),$route,is_null($route));
+        if(is_null($route)){
+            return new Response(404,[],$renderer->render('404'));
         }
 
-        return new Response(404,[],$renderer->render('404'));
+        foreach ($route->getAttributes() as $key => $value) {
+            $request= $request->withAttribute($key, $value);
+        }
+
+        $handler = $route->getHandler();
+
+        [$controller, $method] = $handler;
+
+
+        return ($this->getContainer()->get($controller))->$method($request);
+
+
     }
 
-
-
+    /**
+     *  Build and configure the app container
+     * @return ContainerInterface
+     */
     public function getContainer(): ContainerInterface{
 
-        if($this->container === null){
-            $builder= new ContainerBuilder();
-            $builder->addDefinitions($this->configPath);
-
-            $this->container=$builder->build();
+        if($this->container===null){
+            $this->container= (new ContainerBuilder())->addDefinitions($this->containerConfigPath)->build();
         }
-
         return $this->container;
     }
 
 
-    public function pipe(string $middleware):self{
-        $this->middlewares[]=$middleware;
+    /**
+     * add a middleware to the stack
+     * @param string $middleware
+     * @return $this
+     */
+    public function pipe(string $middleware):self
+    {
+        $this->middlewares[] = $middleware;
         return $this;
     }
 
+    /**
+     * apply middleware and execute run()
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     *
+     */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
+        // make sure all modules are loaded
 
-        static $booted=false;
+        static $booted = false;
         if(!$booted){
-            foreach($this->getContainer()->get('modules') as $module){
+            foreach ($this->getContainer()->get('modules') as $module) {
                 $this->getContainer()->get($module);
             }
-            $booted=true;
+            $booted = true;
         }
+
 
         if(isset($this->middlewares[$this->index])){
-            ($this->getContainer()->get($this->middlewares[$this->index++]))->process($request,$this);
+
+
+            return  ($this->getContainer()->get($this->middlewares[$this->index++]))->process($request, $this);
         }
 
-
-       return  $this->run($request);
+        return $this->run($request);
     }
 }

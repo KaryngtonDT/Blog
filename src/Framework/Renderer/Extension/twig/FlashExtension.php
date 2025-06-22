@@ -19,7 +19,7 @@ class FlashExtension extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('flash', [$this->flashService, 'get']),
+            new TwigFunction('flash', [$this->flashService, 'get'],['is_safe' => ['html']]),
         ];
     }
 

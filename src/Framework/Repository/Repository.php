@@ -13,7 +13,7 @@ class Repository implements RepositoryInterface
     protected string $table;
     protected string $entity;
 
-    public function __construct(private Query $query)
+    public function __construct(protected Query $query)
     {
     }
 
@@ -42,9 +42,7 @@ class Repository implements RepositoryInterface
     {
        $result=  $this->query->from($this->table)->fetchAll();
 
-       return array_map( function ($row) {
-           $this->hydrate($row);
-       },$result);
+       return array_map( [$this,'hydrate'],$result);
 
     }
 
@@ -54,7 +52,7 @@ class Repository implements RepositoryInterface
             return null;
         }
         $result=  $this->query->from($this->table)->where($key,$value)->fetch();
-         return $this->hydrate($result);
+         return $result?$this->hydrate($result):null;
     }
 
     public function insert(array $data): int{
@@ -73,10 +71,8 @@ class Repository implements RepositoryInterface
 
 
 
-    public function hydrate(array $data):?object{
-        if (empty($data)) {
-            return null;
-        }
+    public function hydrate(array $data):object{
+
         $object= new $this->entity();
 
         foreach($data as $key=>$value){

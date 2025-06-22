@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
-final class CreateUserTable extends AbstractMigration
+final class CreatePostCategoryTable extends AbstractMigration
 {
     /**
      * Change Method.
@@ -19,11 +19,11 @@ final class CreateUserTable extends AbstractMigration
      */
     public function change(): void
     {
-        $this->table('users')
-            ->addColumn('email', 'string')
-            ->addColumn('password', 'string')
-            ->addColumn('admin', 'boolean',['default'=>false])
-            ->addIndex(['email'], ['unique' => true])
+        $this->table('post_category')
+            ->addColumn('post_id','integer',['signed'=>false])
+            ->addColumn('category_id','integer',['signed'=>false])
+            ->addForeignKey('post_id','posts','id',['delete'=>'CASCADE'])
+            ->addForeignKey('category_id','categories','id',['delete'=>'CASCADE'])
             ->create();
 
     }

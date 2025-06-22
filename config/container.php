@@ -1,8 +1,11 @@
 <?php
 
 
+use App\Framework\Middleware\AdminMiddleware;
+use App\Framework\Middleware\CsrfMiddleware;
 use App\Framework\Renderer\Extension\twig\CsrfExtension;
 use App\Framework\Renderer\Extension\twig\FlashExtension;
+use App\Framework\Renderer\Extension\twig\PaginationExtension;
 use App\Framework\Renderer\Extension\twig\RouterExtension;
 use App\Framework\Renderer\Renderer;
 use App\Framework\Renderer\RendererInterface;
@@ -12,23 +15,30 @@ use App\Framework\Router\Router;
 use App\Framework\Router\RouterInterface;
 use App\Framework\Service\FlashService;
 use App\Framework\Service\FlashServiceInterface;
+use App\Module\Admin\AdminModule;
+use App\Module\Blog\BlogModule;
 use App\Module\User\Service\AuthService;
 use App\Module\User\Service\AuthServiceInterface;
 use App\Module\User\UserModule;
 use Envms\FluentPDO\Query;
+use Twig\Extension\DebugExtension;
 use function DI\autowire;
 use function DI\get;
 
 return[
     'modules'=>[
-     UserModule::class,
+        UserModule::class,
+        BlogModule::class,
+        AdminModule::class,
     ],
     UserModule::class=>autowire(UserModule::class),
+    BlogModule::class=>autowire(BlogModule::class),
+    AdminModule::class=>autowire(AdminModule::class),
 
 
-    'middlewares'=>[
 
-    ],
+    CsrfMiddleware::class=>autowire(CsrfMiddleware::class),
+    AdminMiddleware::class=>autowire(AdminMiddleware::class),
 
     'templates'=> dirname(__DIR__).'/src/templates',
 
@@ -36,10 +46,13 @@ return[
       get(RouterExtension::class),
         get(FlashExtension::class),
         get(CsrfExtension::class),
+        get(DebugExtension::class),
+        get(PaginationExtension::class),
     ],
      RouterExtension::class=>autowire(RouterExtension::class),
      FlashExtension::class=>autowire(FlashExtension::class),
      CsrfExtension::class=>autowire(CsrfExtension::class),
+    PaginationExtension::class=>autowire(PaginationExtension::class),
 
 
     PDO::class=> static function () {

@@ -15,7 +15,9 @@ class FlashService implements FlashServiceInterface
 
 
     public function add(string $type, string $message):void{
-         $this->flash->set($type, $message);
+
+        unset($_SESSION['__flash']);
+        $this->flash->set($type, $message);
     }
 
     public function get(string $type):?string{

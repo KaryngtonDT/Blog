@@ -4,5 +4,5 @@ namespace App\Framework\Service;
 
 interface ValidationServiceInterface
 {
-    public function vaidator(array $data);
+    public function validator(array $data);
 }

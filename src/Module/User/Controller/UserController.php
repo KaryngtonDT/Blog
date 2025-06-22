@@ -4,6 +4,8 @@ namespace App\Module\User\Controller;
 
 use App\Framework\Renderer\RendererInterface;
 use App\Framework\Router\RouterInterface;
+use App\Framework\Service\FlashService;
+use App\Framework\Service\ValidationService;
 use App\Module\User\Repository\UserRepository;
 use App\Module\User\Service\AuthServiceInterface;
 use GuzzleHttp\Psr7\Response;
@@ -15,9 +17,10 @@ class UserController
 
     public function __construct(
        private RendererInterface $renderer,
-        private UserRepository $userRepository,
         private RouterInterface $router,
-        private AuthServiceInterface $authService
+        private AuthServiceInterface $authService,
+        private ValidationService $validationService,
+        private FlashService $flashService,
     )
     {
     }
@@ -27,6 +30,23 @@ class UserController
         $user=[];
         $errors=[];
 
+        if($request->getMethod()==='POST'){
+
+            $user=$request->getParsedBody();
+            unset($user['_CSRF_INDEX'],$user['_CSRF_TOKEN']);
+           $errors= $this->validationService->validator($user);
+
+           if(empty($errors)){
+             if(  $this->authService->register($user['email'],$user['password'])!==false){
+
+                 $this->flashService->add('success','registration successful');
+                 return  new Response(302, ['location'=>$this->router->generateUri('connexion')]);
+             }
+             $this->flashService->add('error','registration unsuccessful');
+           }
+
+        }
+
         return  new Response(200, [], $this->renderer->render('@user/register',compact('user','errors')));
 
     }
@@ -35,6 +55,22 @@ class UserController
 
         $user=[];
         $errors=[];
+        if($request->getMethod()==='POST'){
+
+            $user=$request->getParsedBody();
+            unset($user['_CSRF_INDEX'],$user['_CSRF_TOKEN']);
+            $errors= $this->validationService->validator($user);
+
+            if(empty($errors)){
+                if(  $this->authService->login($user['email'],$user['password'])!==false){
+
+                    $this->flashService->add('success','login successful');
+                    return  new Response(302, ['location'=>$this->router->generateUri('posts.index')]);
+                }
+                $this->flashService->add('danger','wrong credentials');
+            }
+
+        }
 
         return  new Response(200, [], $this->renderer->render('@user/login',compact('user','errors')));
 
@@ -44,7 +80,7 @@ class UserController
 
         $this->authService->logout();
 
-        return  new Response(200, ['Location'=> $this->router->generateUri('')] );
+        return  new Response(302, ['Location'=> $this->router->generateUri('login')] );
 
     }
 

@@ -1,0 +1,8 @@
+{% import  'macro_table.html.twig' as table %}
+{% extends 'base.html.twig' %}
+{% block title %} admin categories {% endblock %}
+
+{% block body %}
+
+    {{ table.index('categories','name',categories) }}
+{% endblock %}

@@ -19,7 +19,7 @@ class AuthService implements AuthServiceInterface
 
     }
 
-    public function register(string $email, string $password,?bool $admin=false):false|int{
+    public function register(string $email, string $password):false|int{
         $user= $this->repository->findBy('email',$email);
         if($user){
 
@@ -30,7 +30,7 @@ class AuthService implements AuthServiceInterface
             [
                 'email' => $email,
                 'password' => password_hash($password,PASSWORD_DEFAULT),
-                'admin' => $admin,
+
             ]
         );
     }
@@ -38,30 +38,29 @@ class AuthService implements AuthServiceInterface
     public function login(string $email, string $password):bool{
         $user= $this->repository->findBy('email',$email);
         if($user && password_verify($password,$user->getPassword())){
+            $_SESSION['auth']=$user->getId();
             $this->currentUser = $user;
             return true;
         }
         return false;
     }
 
-    public function logout():bool{
-        try{
+    public function logout():void{
+
             unset($_SESSION['auth']);
-            return true;
-        }catch (\Exception){
-            return false;
-        }
+            $this->currentUser= null;
+
 
 
     }
 
     public function  isLoggedIn():bool
     {
-        return $this->currentUser !== null;
+        return $this->user() !== null;
     }
 
     public function isAdmin():bool{
-        return $this->currentUser->isAdmin();
+        return $this->isLoggedIn() && $this->currentUser->isAdmin();
     }
     public function user(): ?User{
         return $this->currentUser;

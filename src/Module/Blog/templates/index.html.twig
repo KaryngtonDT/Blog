@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Posts {% if category%}category-{{ category.name }}{% endif%} {% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-9">
+            <h1 class="text-center mb-4">Posts {% if category%} for category {{ category.name }}{% endif%}</h1>
+            <div class="row row-cols-1 row-cols-md-4 g-4 mb-4">
+                {% for post in posts %}
+                    <div class="col">
+                        <div class="card h-100" >
+                            <div class="card-header">
+                                <img src="{{ post.image }}" class="card-img-top" alt="{{ post.title }}">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ post.title }}</h5>
+                                <p class="card-text">{{ post.content|slice(0,150)~'...' }}</p>
+                                <small class="text-muted">{{ post.createdAt.format('d/m/y H:i') }}</small>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{{ path('posts.show',{slug:post.slug, id:post.id~'' }) }}" class="btn btn-primary">See more</a>
+                            </div>
+                        </div>
+                    </div>
+                {% else%}
+                    <div>Not Found</div>
+                {% endfor %}
+
+            </div>
+            {% if category %}
+                {{ paginate(posts,'posts.category.index',{slug:category.slug}) }}
+            {% else %}
+                {{ paginate(posts,'posts.index') }}
+            {% endif%}
+
+        </div>
+        <div class="col-md-3">
+            <h1 class="text-center mb-4">Categories</h1>
+            <div class="list-group">
+                {% for cat  in categories %}
+                    <a href="{{ path('posts.category.index',{slug:cat.slug}) }}" class="list-group-item list-group-item-action  {% if cat.id==category.id %}active{% endif%} ">{{ cat.name }}</a>
+                {% else %}
+                    <a href="#" class="list-group-item ">not found</a>
+                {% endfor %}
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

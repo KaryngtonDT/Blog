@@ -1,0 +1,57 @@
+{% import '_form_macro.html.twig' as form %}
+<form method="post" action="{{ action }}">
+    {{ csrf_input()  }}
+    {% if edit  %}
+        <div>
+            <img src="{{ post.image }}" width="100%" height="300px" alt="{{ post.title }}">
+        </div>
+        <div class="d-flex justify-content-between">
+            <span class="text-muted">{{ post.createdAt.format('d/m/Y H:i') }}</span>
+            {% if  post.updatedAt %}
+                <span class="text-muted">{{ post.updatedAt.format('d/m/Y H:i') }}</span>
+            {% endif %}
+        </div>
+    {% endif %}
+    {% set fields= ['slug','title','content'] %}
+    {% for field in fields %}
+
+        {{ form.input(
+            field,
+            'text',
+            attribute(errors,field),
+            attribute(post,field)|default(''))
+        }}
+
+    {% endfor %}
+
+
+
+    <div class="mb-3">
+        <label class="form-label">Catégories</label>
+        {% set
+            selectedIds =
+            post.categories is defined ?
+            (post.categories[0] is defined and attribute(post.categories[0], 'id') is not null? post.categories|map(c => c.id): post.categories)
+            : []
+        %}
+        {% for category in categories %}
+            <div class="form-check">
+                <input class="form-check-input"
+                       type="checkbox"
+                       value="{{ category.id }}"
+                       id="{{ category.id }}"
+                       name="categories[]"
+                       {% if category.id in selectedIds %}checked{% endif %}
+                >
+                <label class="form-check-label" for="flexCheckDefault">
+                    {{ category.name }}
+                </label>
+            </div>
+        {% endfor %}
+        {% if errors.categories %}
+            <span class="text-danger">{{ errors.categories }}</span>
+        {% endif %}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

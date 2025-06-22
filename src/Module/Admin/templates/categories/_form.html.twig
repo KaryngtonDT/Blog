@@ -1,0 +1,17 @@
+{% import '_form_macro.html.twig' as form %}
+<form method="post" action="{{ action }}">
+    {{ csrf_input() }}
+    {% set fields= ['name','slug'] %}
+    {% for field in fields %}
+
+        {{ form.input(
+            field,
+            'text',
+            attribute(errors,field),
+            attribute(category,field)|default(''))
+        }}
+
+    {% endfor %}
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

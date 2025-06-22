@@ -26,33 +26,33 @@ class Router implements RouterInterface
         string $name,
         string $path,
          $handler,
-        array $wheres=[]
+        array $requirements = [],
 
     ):void
     {
-         $this->add($name,$path,$handler,['GET'],$wheres);
+         $this->add($name,$path,$handler,['GET'],$requirements);
     }
 
     public function post(
         string $name,
         string $path,
          $handler,
-        array $wheres=[]
+        array $requirements = [],
 
     ):void
     {
-        $this->add($name,$path,$handler,['POST'],$wheres);
+        $this->add($name,$path,$handler,['POST'],$requirements);
     }
 
     public function delete(
         string $name,
         string $path,
          $handler,
-        array $wheres=[]
+        array $requirements = [],
 
     ):void
     {
-        $this->add($name,$path,$handler,['DELETE'],$wheres);
+        $this->add($name,$path,$handler,['DELETE'],$requirements);
     }
 
 
@@ -65,7 +65,7 @@ class Router implements RouterInterface
         ['id'=>'[0-9]+']);
         $this->post("$prefixName.update","$prefixPath/{id}",[$handler,'edit'],
         ['id'=>'[0-9]+']);
-        $this->delete("$prefixName.delete","$prefixPath/{id}",[$handler,'delete'],
+        $this->delete("$prefixName.delete","$prefixPath/{id}/delete",[$handler,'delete'],
         ['id'=>'[0-9]+']);
 
     }
@@ -102,23 +102,22 @@ class Router implements RouterInterface
     }
 
 
-    private  function add(
+
+    private function add(
         string $name,
         string $path,
-        $handler,
-        array $methods ,
-        array $wheres=[]
-    ){
-
-        $route = new Route($name, $path, $handler, $methods);
-        foreach ($wheres as $key=>$regex) {
-            $route->where($key, $regex);
+               $handler,
+        array $methods,
+        array $requirements = [],
+    )
+    {
+        $route = new Route($name,$path, $handler, $methods);
+        foreach ($requirements as $parameter => $expression) {
+            $route->where($parameter, $expression);
         }
+        $this->router->add($route);
 
-       if( $this->router->add($route)){
-           $this->routes[]=[$name,$path,$handler,$methods];
-       }
-
+        // dd($this->has('posts.index'));
     }
 
 

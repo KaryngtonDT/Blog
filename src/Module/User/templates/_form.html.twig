@@ -1,8 +1,8 @@
 {% import '_form_macro.html.twig' as form %}
 <form method="post" action="{{ action }}">
 
-    {{ form.input('email','text',errors.email,user) }}
-    {{ form.input('password','text',errors.password,user) }}
-
+    {{ form.input('email','text',errors.email,user.email) }}
+    {{ form.input('password','text',errors.password,user.password) }}
+    {{ csrf_input() }}
     <button type="submit" class="btn btn-primary">{{ submit }}</button>
 </form>

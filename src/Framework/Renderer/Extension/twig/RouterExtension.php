@@ -18,8 +18,8 @@ class RouterExtension extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('path', [$this, 'generatePath']),
-            new TwigFunction('route_exists', [$this, 'routeExists']),
+            new TwigFunction('path', [$this, 'generatePath'],['is_safe' => ['html']]),
+            new TwigFunction('route_exists', [$this, 'routeExists'],['is_safe' => ['html']]),
         ];
     }
 

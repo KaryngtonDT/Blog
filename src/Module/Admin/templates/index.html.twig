@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{%block title %}Admin{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <h1 class="text-center mb-4">Administration</h1>
+        <div class="list-group col-md-6" style="margin: auto">
+            {% for entity in entities %}
+
+                <a href="{{ path('admin.'~entity~'.index') }}" class="list-group-item list-group-item-action ">handle {{ entity }}</a>
+            {% else %}
+                <a href="#" class="list-group-item ">not found</a>
+            {% endfor %}
+
+
+        </div>
+    </div>
+
+
+{% endblock %}

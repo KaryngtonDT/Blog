@@ -9,7 +9,7 @@ interface AuthServiceInterface
     public function login(string $email, string $password): bool;
     public function register(string $email, string $password): false|int;
 
-    public function logout(): bool;
+    public function logout(): void;
 
     public function isLoggedIn(): bool;
 

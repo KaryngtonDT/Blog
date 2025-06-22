@@ -8,7 +8,7 @@ use Respect\Validation\Exceptions\NestedValidationException;
 class ValidationService implements ValidationServiceInterface
 {
 
-    public function vaidator(array $data)
+    public function validator(array $data)
     {
         $errors = [];
         $rules = [

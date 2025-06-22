@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}  create Category{% endblock %}
+
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-6" style="margin: auto;">
+            <h1 class="text-center">Create new Category</h1>
+            {%include '@admin/categories/_form.html.twig' with {
+                action:  path('admin.categories.create'),
+                category: category,
+
+            } %}
+        </div>
+
+    </div>
+
+
+
+{% endblock %}
