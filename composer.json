@@ -11,11 +11,14 @@
     "paragonie/anti-csrf": "^2.4",
     "guzzlehttp/psr7": "^2.7",
     "laminas/laminas-httphandlerrunner": "^2.12",
-    "middlewares/whoops": "^2.1",
     "php-di/php-di": "^7.0",
     "robmorgan/phinx": "^0.16.9",
     "respect/validation": "^2.4",
     "twig/twig": "^3.21",
-    "envms/fluentpdo": "^2.2"
+    "envms/fluentpdo": "^2.2",
+    "symfony/var-dumper": "^7.3",
+    "pagerfanta/pagerfanta": "^4.7",
+    "fakerphp/faker": "^1.24",
+    "filp/whoops": "^2.18"
   }
 }

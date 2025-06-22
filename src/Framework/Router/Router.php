@@ -2,18 +2,20 @@
 
 namespace App\Framework\Router;
 
-use PhpDevCommunity\Exception\MethodNotAllowed;
-use PhpDevCommunity\Exception\RouteNotFound;
+
 use PhpDevCommunity\Route;
 use PhpDevCommunity\Router as PhpRouter;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Log\InvalidArgumentException;
-use function DI\add;
 
-class Router
+
+
+class Router implements RouterInterface
 {
 
     private $router;
+    private ?array $routes=null;
+
+
     public function __construct()
     {
         $this->router = new PhpRouter();
@@ -71,7 +73,7 @@ class Router
     {
         try {
             return $this->router->match($serverRequest);
-        }catch (MethodNotAllowed|RouteNotFound ){
+        }catch (\Exception){
             return  null;
         }
 
@@ -88,28 +90,37 @@ class Router
             $this->generateUri($name);
             return true;
 
-        }catch (InvalidArgumentException ){
+        }catch (\Exception $e ){
             return false;
         }
     }
 
 
+    public function getRoutes(): ?array
+    {
+        return $this->routes;
+    }
 
 
     private  function add(
         string $name,
         string $path,
-        string $handler,
+        $handler,
         array $methods ,
         array $wheres=[]
     ){
 
-        $route = new Route($path, $name, $handler, $methods);
+        $route = new Route($name, $path, $handler, $methods);
         foreach ($wheres as $key=>$regex) {
             $route->where($key, $regex);
         }
-        $this->router->add($route);
+
+       if( $this->router->add($route)){
+           $this->routes[]=[$name,$path,$handler,$methods];
+       }
 
     }
+
+
 
 }

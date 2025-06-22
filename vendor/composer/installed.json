@@ -401,6 +401,72 @@
             "install-path": "../envms/fluentpdo"
         },
         {
+            "name": "fakerphp/faker",
+            "version": "v1.24.1",
+            "version_normalized": "1.24.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FakerPHP/Faker.git",
+                "reference": "e0ee18eb1e6dc3cda3ce9fd97e5a0689a88a64b5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/e0ee18eb1e6dc3cda3ce9fd97e5a0689a88a64b5",
+                "reference": "e0ee18eb1e6dc3cda3ce9fd97e5a0689a88a64b5",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4 || ^8.0",
+                "psr/container": "^1.0 || ^2.0",
+                "symfony/deprecation-contracts": "^2.2 || ^3.0"
+            },
+            "conflict": {
+                "fzaninotto/faker": "*"
+            },
+            "require-dev": {
+                "bamarni/composer-bin-plugin": "^1.4.1",
+                "doctrine/persistence": "^1.3 || ^2.0",
+                "ext-intl": "*",
+                "phpunit/phpunit": "^9.5.26",
+                "symfony/phpunit-bridge": "^5.4.16"
+            },
+            "suggest": {
+                "doctrine/orm": "Required to use Faker\\ORM\\Doctrine",
+                "ext-curl": "Required by Faker\\Provider\\Image to download images.",
+                "ext-dom": "Required by Faker\\Provider\\HtmlLorem for generating random HTML.",
+                "ext-iconv": "Required by Faker\\Provider\\ru_RU\\Text::realText() for generating real Russian text.",
+                "ext-mbstring": "Required for multibyte Unicode string functionality."
+            },
+            "time": "2024-11-21T13:46:39+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Faker\\": "src/Faker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Zaninotto"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "support": {
+                "issues": "https://github.com/FakerPHP/Faker/issues",
+                "source": "https://github.com/FakerPHP/Faker/tree/v1.24.1"
+            },
+            "install-path": "../fakerphp/faker"
+        },
+        {
             "name": "filp/whoops",
             "version": "2.18.3",
             "version_normalized": "2.18.3.0",
@@ -813,125 +879,108 @@
             "install-path": "../league/container"
         },
         {
-            "name": "middlewares/utils",
-            "version": "v4.0.2",
-            "version_normalized": "4.0.2.0",
+            "name": "pagerfanta/pagerfanta",
+            "version": "v4.7.1",
+            "version_normalized": "4.7.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/middlewares/utils.git",
-                "reference": "749a3055972ebf4197f663eedcb38cae3c81f1c8"
+                "url": "https://github.com/BabDev/Pagerfanta.git",
+                "reference": "b09216fc53665c4d8a39b7f60e421165cb4693e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/middlewares/utils/zipball/749a3055972ebf4197f663eedcb38cae3c81f1c8",
-                "reference": "749a3055972ebf4197f663eedcb38cae3c81f1c8",
+                "url": "https://api.github.com/repos/BabDev/Pagerfanta/zipball/b09216fc53665c4d8a39b7f60e421165cb4693e4",
+                "reference": "b09216fc53665c4d8a39b7f60e421165cb4693e4",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1",
-                "psr/container": "^1.0 || ^2.0",
-                "psr/http-factory": "^1.0",
-                "psr/http-message": "^1.0 || ^2.0",
-                "psr/http-server-middleware": "^1.0"
+                "ext-json": "*",
+                "php": "^8.1",
+                "symfony/deprecation-contracts": "^2.1 || ^3.0"
+            },
+            "conflict": {
+                "doctrine/collections": "<1.8",
+                "doctrine/dbal": "<3.5",
+                "doctrine/mongodb-odm": "<2.4",
+                "doctrine/orm": "<2.14",
+                "doctrine/phpcr-odm": "<1.7",
+                "ruflin/elastica": "<7.3",
+                "solarium/solarium": "<6.2",
+                "twig/twig": "<2.13"
+            },
+            "replace": {
+                "pagerfanta/core": "self.version",
+                "pagerfanta/doctrine-collections-adapter": "self.version",
+                "pagerfanta/doctrine-dbal-adapter": "self.version",
+                "pagerfanta/doctrine-mongodb-odm-adapter": "self.version",
+                "pagerfanta/doctrine-orm-adapter": "self.version",
+                "pagerfanta/doctrine-phpcr-odm-adapter": "self.version",
+                "pagerfanta/elastica-adapter": "self.version",
+                "pagerfanta/solarium-adapter": "self.version",
+                "pagerfanta/twig": "self.version"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.41",
-                "guzzlehttp/psr7": "^2.6",
-                "laminas/laminas-diactoros": "^3.3",
-                "nyholm/psr7": "^1.8",
-                "oscarotero/php-cs-fixer-config": "^2.0",
-                "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^10.5",
-                "slim/psr7": "^1.6",
-                "squizlabs/php_codesniffer": "^3.8",
-                "sunrise/http-message": "^3.0"
+                "dg/bypass-finals": "^1.5.1",
+                "doctrine/collections": "^1.8 || ^2.0",
+                "doctrine/dbal": "^3.5 || ^4.0",
+                "doctrine/mongodb-odm": "^2.4",
+                "doctrine/orm": "^2.14 || ^3.0",
+                "doctrine/phpcr-odm": "^1.7 || ^2.0",
+                "jackalope/jackalope-doctrine-dbal": "^1.9 || ^2.0",
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "2.0.3",
+                "phpstan/phpstan-phpunit": "2.0.1",
+                "phpunit/phpunit": "10.5.39",
+                "rector/rector": "2.0.3",
+                "ruflin/elastica": "^7.3 || ^8.0",
+                "solarium/solarium": "^6.2",
+                "symfony/cache": "^5.4 || ^6.3 || ^7.0",
+                "twig/twig": "^2.13 || ^3.0"
             },
-            "time": "2025-01-23T13:33:55+00:00",
+            "suggest": {
+                "twig/twig": "To integrate Pagerfanta with Twig"
+            },
+            "time": "2024-12-13T15:12:11+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "Middlewares\\Utils\\": "src/"
-                }
+                    "Pagerfanta\\": "lib/Core/",
+                    "Pagerfanta\\Twig\\": "lib/Twig/",
+                    "Pagerfanta\\Elastica\\": "lib/Adapter/Elastica/",
+                    "Pagerfanta\\Solarium\\": "lib/Adapter/Solarium/",
+                    "Pagerfanta\\Doctrine\\ORM\\": "lib/Adapter/Doctrine/ORM/",
+                    "Pagerfanta\\Doctrine\\DBAL\\": "lib/Adapter/Doctrine/DBAL/",
+                    "Pagerfanta\\Doctrine\\PHPCRODM\\": "lib/Adapter/Doctrine/PHPCRODM/",
+                    "Pagerfanta\\Doctrine\\MongoDBODM\\": "lib/Adapter/Doctrine/MongoDBODM/",
+                    "Pagerfanta\\Doctrine\\Collections\\": "lib/Adapter/Doctrine/Collections/"
+                },
+                "exclude-from-classmap": [
+                    "lib/**/Tests/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
-            "description": "Common utils for PSR-15 middleware packages",
-            "homepage": "https://github.com/middlewares/utils",
+            "description": "Pagination for PHP",
             "keywords": [
-                "PSR-11",
-                "http",
-                "middleware",
-                "psr-15",
-                "psr-17",
-                "psr-7"
+                "page",
+                "pagination",
+                "paginator",
+                "paging"
             ],
             "support": {
-                "issues": "https://github.com/middlewares/utils/issues",
-                "source": "https://github.com/middlewares/utils/tree/v4.0.2"
+                "issues": "https://github.com/BabDev/Pagerfanta/issues",
+                "source": "https://github.com/BabDev/Pagerfanta/tree/v4.7.1"
             },
-            "install-path": "../middlewares/utils"
-        },
-        {
-            "name": "middlewares/whoops",
-            "version": "v2.1.1",
-            "version_normalized": "2.1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/middlewares/whoops.git",
-                "reference": "51568de566dce840683c81ae6ea7a269e45c553f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/middlewares/whoops/zipball/51568de566dce840683c81ae6ea7a269e45c553f",
-                "reference": "51568de566dce840683c81ae6ea7a269e45c553f",
-                "shasum": ""
-            },
-            "require": {
-                "filp/whoops": "^2.17",
-                "middlewares/utils": "^2 || ^3 || ^4",
-                "php": "^7.2 || ^8.0",
-                "psr/container": "^1.0 || ^2.0",
-                "psr/http-server-middleware": "^1"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3",
-                "laminas/laminas-diactoros": "^2 || ^3",
-                "oscarotero/php-cs-fixer-config": "^2",
-                "phpstan/phpstan": "^1 || ^2",
-                "phpunit/phpunit": "^8 || ^9",
-                "squizlabs/php_codesniffer": "^3"
-            },
-            "time": "2025-04-27T11:33:14+00:00",
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "psr-4": {
-                    "Middlewares\\": "src/"
+            "funding": [
+                {
+                    "url": "https://github.com/mbabker",
+                    "type": "github"
                 }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
             ],
-            "description": "Middleware to use Whoops as error handler",
-            "homepage": "https://github.com/middlewares/whoops",
-            "keywords": [
-                "error",
-                "http",
-                "middleware",
-                "psr-15",
-                "psr-7",
-                "server",
-                "whoops"
-            ],
-            "support": {
-                "issues": "https://github.com/middlewares/whoops/issues",
-                "source": "https://github.com/middlewares/whoops/tree/v2.1.1"
-            },
-            "install-path": "../middlewares/whoops"
+            "install-path": "../pagerfanta/pagerfanta"
         },
         {
             "name": "paragonie/anti-csrf",
@@ -2823,6 +2872,93 @@
                 }
             ],
             "install-path": "../symfony/string"
+        },
+        {
+            "name": "symfony/var-dumper",
+            "version": "v7.3.0",
+            "version_normalized": "7.3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/var-dumper.git",
+                "reference": "548f6760c54197b1084e1e5c71f6d9d523f2f78e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/548f6760c54197b1084e1e5c71f6d9d523f2f78e",
+                "reference": "548f6760c54197b1084e1e5c71f6d9d523f2f78e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "symfony/deprecation-contracts": "^2.5|^3",
+                "symfony/polyfill-mbstring": "~1.0"
+            },
+            "conflict": {
+                "symfony/console": "<6.4"
+            },
+            "require-dev": {
+                "ext-iconv": "*",
+                "symfony/console": "^6.4|^7.0",
+                "symfony/http-kernel": "^6.4|^7.0",
+                "symfony/process": "^6.4|^7.0",
+                "symfony/uid": "^6.4|^7.0",
+                "twig/twig": "^3.12"
+            },
+            "time": "2025-04-27T18:39:23+00:00",
+            "bin": [
+                "Resources/bin/var-dump-server"
+            ],
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "Resources/functions/dump.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Component\\VarDumper\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides mechanisms for walking through any arbitrary PHP variable",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "debug",
+                "dump"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/var-dumper/tree/v7.3.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "install-path": "../symfony/var-dumper"
         },
         {
             "name": "twig/twig",

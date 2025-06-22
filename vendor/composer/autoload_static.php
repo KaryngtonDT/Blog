@@ -7,9 +7,9 @@ namespace Composer\Autoload;
 class ComposerStaticInitb27c52d75724f7f73c606f71ed8075ae
 {
     public static $files = array (
+        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
-        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '72142d7b40a3a0b14e91825290b5ad82' => __DIR__ . '/..' . '/cakephp/core/functions.php',
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
@@ -18,6 +18,7 @@ class ComposerStaticInitb27c52d75724f7f73c606f71ed8075ae
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         '2df68f9e79c919e2d88506611769ed2e' => __DIR__ . '/..' . '/respect/stringifier/src/stringify.php',
         'b33e3d135e5d9e47d845c576147bda89' => __DIR__ . '/..' . '/php-di/php-di/src/functions.php',
+        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         '89efb1254ef2d1c5d80096acd12c4098' => __DIR__ . '/..' . '/twig/twig/src/Resources/core.php',
         'ffecb95d45175fd40f75be8a23b34f90' => __DIR__ . '/..' . '/twig/twig/src/Resources/debug.php',
         'c7baa00073ee9c61edf148c51917cfb4' => __DIR__ . '/..' . '/twig/twig/src/Resources/escaper.php',
@@ -42,6 +43,7 @@ class ComposerStaticInitb27c52d75724f7f73c606f71ed8075ae
             'Symfony\\Polyfill\\Intl\\Grapheme\\' => 31,
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Contracts\\Service\\' => 26,
+            'Symfony\\Component\\VarDumper\\' => 28,
             'Symfony\\Component\\String\\' => 25,
             'Symfony\\Component\\Filesystem\\' => 29,
             'Symfony\\Component\\Console\\' => 26,
@@ -65,11 +67,15 @@ class ComposerStaticInitb27c52d75724f7f73c606f71ed8075ae
             'Phinx\\' => 6,
             'ParagonIE\\ConstantTime\\' => 23,
             'ParagonIE\\AntiCSRF\\' => 19,
-        ),
-        'M' => 
-        array (
-            'Middlewares\\Utils\\' => 18,
-            'Middlewares\\' => 12,
+            'Pagerfanta\\Twig\\' => 16,
+            'Pagerfanta\\Solarium\\' => 20,
+            'Pagerfanta\\Elastica\\' => 20,
+            'Pagerfanta\\Doctrine\\PHPCRODM\\' => 29,
+            'Pagerfanta\\Doctrine\\ORM\\' => 24,
+            'Pagerfanta\\Doctrine\\MongoDBODM\\' => 31,
+            'Pagerfanta\\Doctrine\\DBAL\\' => 25,
+            'Pagerfanta\\Doctrine\\Collections\\' => 32,
+            'Pagerfanta\\' => 11,
         ),
         'L' => 
         array (
@@ -84,6 +90,10 @@ class ComposerStaticInitb27c52d75724f7f73c606f71ed8075ae
         'G' => 
         array (
             'GuzzleHttp\\Psr7\\' => 16,
+        ),
+        'F' => 
+        array (
+            'Faker\\' => 6,
         ),
         'E' => 
         array (
@@ -143,6 +153,10 @@ class ComposerStaticInitb27c52d75724f7f73c606f71ed8075ae
         'Symfony\\Contracts\\Service\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/service-contracts',
+        ),
+        'Symfony\\Component\\VarDumper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/var-dumper',
         ),
         'Symfony\\Component\\String\\' => 
         array (
@@ -214,13 +228,41 @@ class ComposerStaticInitb27c52d75724f7f73c606f71ed8075ae
         array (
             0 => __DIR__ . '/..' . '/paragonie/anti-csrf/src',
         ),
-        'Middlewares\\Utils\\' => 
+        'Pagerfanta\\Twig\\' => 
         array (
-            0 => __DIR__ . '/..' . '/middlewares/utils/src',
+            0 => __DIR__ . '/..' . '/pagerfanta/pagerfanta/lib/Twig',
         ),
-        'Middlewares\\' => 
+        'Pagerfanta\\Solarium\\' => 
         array (
-            0 => __DIR__ . '/..' . '/middlewares/whoops/src',
+            0 => __DIR__ . '/..' . '/pagerfanta/pagerfanta/lib/Adapter/Solarium',
+        ),
+        'Pagerfanta\\Elastica\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/pagerfanta/pagerfanta/lib/Adapter/Elastica',
+        ),
+        'Pagerfanta\\Doctrine\\PHPCRODM\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/pagerfanta/pagerfanta/lib/Adapter/Doctrine/PHPCRODM',
+        ),
+        'Pagerfanta\\Doctrine\\ORM\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/pagerfanta/pagerfanta/lib/Adapter/Doctrine/ORM',
+        ),
+        'Pagerfanta\\Doctrine\\MongoDBODM\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/pagerfanta/pagerfanta/lib/Adapter/Doctrine/MongoDBODM',
+        ),
+        'Pagerfanta\\Doctrine\\DBAL\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/pagerfanta/pagerfanta/lib/Adapter/Doctrine/DBAL',
+        ),
+        'Pagerfanta\\Doctrine\\Collections\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/pagerfanta/pagerfanta/lib/Adapter/Doctrine/Collections',
+        ),
+        'Pagerfanta\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/pagerfanta/pagerfanta/lib/Core',
         ),
         'League\\Container\\' => 
         array (
@@ -241,6 +283,10 @@ class ComposerStaticInitb27c52d75724f7f73c606f71ed8075ae
         'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
+        ),
+        'Faker\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fakerphp/faker/src/Faker',
         ),
         'Envms\\FluentPDO\\' => 
         array (

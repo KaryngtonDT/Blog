@@ -1,0 +1,13 @@
+
+{% macro input(name,type,item,errors) %}
+<div class="mb-3">
+    <label for="{{ name }}" class="form-label">{{ name |title }}</label>
+    <input
+            type="{{ type }}"
+            class="form-control {% if error %}is-invalid{% endif %}"
+            id="{{ name }}"
+            value="{{ attribute(item,name) |default('') }}"
+    >
+    <span class="text-danger">{{ error }}</span>
+</div>
+{% endmacro %}

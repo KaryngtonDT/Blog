@@ -3,7 +3,7 @@
         'name' => 'steve/blog',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '94857b21bb23e4072491c39908bca721e29e6128',
+        'reference' => 'dd2062c264221f1eb04e4f045b16b67af786c8f8',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -64,6 +64,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'fakerphp/faker' => array(
+            'pretty_version' => 'v1.24.1',
+            'version' => '1.24.1.0',
+            'reference' => 'e0ee18eb1e6dc3cda3ce9fd97e5a0689a88a64b5',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../fakerphp/faker',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'filp/whoops' => array(
             'pretty_version' => '2.18.3',
             'version' => '2.18.3.0',
@@ -109,28 +118,73 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'middlewares/utils' => array(
-            'pretty_version' => 'v4.0.2',
-            'version' => '4.0.2.0',
-            'reference' => '749a3055972ebf4197f663eedcb38cae3c81f1c8',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../middlewares/utils',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-        'middlewares/whoops' => array(
-            'pretty_version' => 'v2.1.1',
-            'version' => '2.1.1.0',
-            'reference' => '51568de566dce840683c81ae6ea7a269e45c553f',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../middlewares/whoops',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
         'orno/di' => array(
             'dev_requirement' => false,
             'replaced' => array(
                 0 => '~2.0',
+            ),
+        ),
+        'pagerfanta/core' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => 'v4.7.1',
+            ),
+        ),
+        'pagerfanta/doctrine-collections-adapter' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => 'v4.7.1',
+            ),
+        ),
+        'pagerfanta/doctrine-dbal-adapter' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => 'v4.7.1',
+            ),
+        ),
+        'pagerfanta/doctrine-mongodb-odm-adapter' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => 'v4.7.1',
+            ),
+        ),
+        'pagerfanta/doctrine-orm-adapter' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => 'v4.7.1',
+            ),
+        ),
+        'pagerfanta/doctrine-phpcr-odm-adapter' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => 'v4.7.1',
+            ),
+        ),
+        'pagerfanta/elastica-adapter' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => 'v4.7.1',
+            ),
+        ),
+        'pagerfanta/pagerfanta' => array(
+            'pretty_version' => 'v4.7.1',
+            'version' => '4.7.1.0',
+            'reference' => 'b09216fc53665c4d8a39b7f60e421165cb4693e4',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../pagerfanta/pagerfanta',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'pagerfanta/solarium-adapter' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => 'v4.7.1',
+            ),
+        ),
+        'pagerfanta/twig' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => 'v4.7.1',
             ),
         ),
         'paragonie/anti-csrf' => array(
@@ -329,7 +383,7 @@
         'steve/blog' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '94857b21bb23e4072491c39908bca721e29e6128',
+            'reference' => 'dd2062c264221f1eb04e4f045b16b67af786c8f8',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -422,6 +476,15 @@
             'reference' => 'f3570b8c61ca887a9e2938e85cb6458515d2b125',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/string',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'symfony/var-dumper' => array(
+            'pretty_version' => 'v7.3.0',
+            'version' => '7.3.0.0',
+            'reference' => '548f6760c54197b1084e1e5c71f6d9d523f2f78e',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/var-dumper',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
